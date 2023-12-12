@@ -13,4 +13,6 @@ int main()
     {
         cin >> array[i];
     }
+
+    return 0;
 }
