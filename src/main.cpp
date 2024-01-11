@@ -1,18 +1,11 @@
-#include <iostream>
-//#include <list>
+#include<iostream>
+#include<cstdio>
+#include "unitest.h"
+//#include "mathfunc.h"
 using namespace std;
-//#include "chessBoard.h"
 
 int main()
 {
-    int n, k;
-    cin >> n >> k;
-    int *array = new int[n];
-
-    for(int i = 0; i < n; i++)
-    {
-        cin >> array[i];
-    }
-
+    testMath();
     return 0;
 }

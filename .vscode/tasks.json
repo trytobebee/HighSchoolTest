@@ -9,6 +9,7 @@
                 "-fansi-escape-codes",
                 "-g",
                 "${file}",
+                "unitest.cpp",
                 "-I",
                 "${workspaceFolder}/include",
                 "-o",

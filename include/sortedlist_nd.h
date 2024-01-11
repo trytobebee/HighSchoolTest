@@ -1,5 +1,7 @@
+#pragma once
 #include <cstdio>
 #include <string>
+#include "sorter.h"
 using namespace std;
 //construct list which works for sorted items(no duplications in data)
 //insert a item(with the particular value) to a particular position fits the sorted status O(logN)
@@ -70,47 +72,13 @@ public:
 
     
 
-    int * BinarySearch(int* start, int* end, int value)
-    {
-        int* pLeft = start;
-        int* pRight = end;
-
-        int* pMid;
-
-        while(pLeft < pRight - 1)
-        {
-            pMid = pLeft + (pRight-pLeft)/2;
-
-            if(*pMid > value)
-            {
-                pRight = pMid;
-            }
-            else if(*pMid == value)
-            {
-                //found
-                return pMid;
-                break;
-            }
-            else
-            {
-                pLeft = pMid;
-            }
-        }
-        
-        if(*pLeft == value)
-            return pLeft;
-        else if(*pRight == value)
-            return pRight;
-        else
-            return NULL;
-    }
-
+    
     int * BinarySearch(int value)
     {
         int* start = m_pMemory;
         int* end = m_pCurrentMemoryPos - 1;
 
-        return BinarySearch(start, end, value);
+        return sorters::BinarySearch(start, end, value);
     }
 
     //序列中一定没有value
@@ -202,7 +170,7 @@ public:
             return false;
 
         int* pLastInt = m_pCurrentMemoryPos - 1;
-        int *pFindValue = BinarySearch(m_pMemory, pLastInt, value);
+        int *pFindValue = sorters::BinarySearch(m_pMemory, pLastInt, value);
         if(!pFindValue)
         {
             //didn't find the value

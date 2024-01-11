@@ -2,6 +2,8 @@
 #include "ctimer.h"
 #include <iostream>
 #include "chessBoard.h"
+#include "mathfunc.h"
+#include "unitest.h"
 using namespace std;
 
 void testcase_sortedlist_nd()
@@ -89,6 +91,61 @@ int testNQueen()
         chessBoard2 myChess2(n);
         myChess2.FitQueensAll(true);
         tm.getTimeSpan("chessBoard2 class run");
+    }
+    
+    return 0;
+}
+
+bool testEnlistPrimes()
+{
+    CTimer tmDebug;
+    tmDebug.start();
+
+    int* primes;
+    int count;
+    
+    mathfunc::EnlistAllPrime(false, primes, count);
+    tmDebug.getTimeSpan("without speed up");
+
+    int* primes2;
+    int count2;
+    mathfunc::EnlistAllPrime(true, primes2, count2);
+    tmDebug.getTimeSpan("with speed up");
+
+    if(count != count2)
+    {
+        printf("inconsistent count of prime\n");
+        return false;
+    }    
+
+    int i;
+    for(i = 0; i < count; i++)
+    {
+        if(primes[i] != primes2[i])
+        {
+            printf("inconsistent prime value @position %d, %d vs %d\n", i, primes[i], primes2[i]);
+            return false;
+        }   
+    }
+    if(i == count)
+    {
+        printf("confirmed, identical prime array\n");
+    }
+    
+    return true;
+}
+
+int testMath()
+{
+    while(true)
+    {
+        int a, b;
+        cin >> a >> b;
+        if(a <= 0)
+            break;
+
+        cout << "最大公约数" << mathfunc::GetMaxCofactor(a, b) << endl;
+        cout << "最小公倍数" << mathfunc::GetLeastCoMultiple(a, b) << endl;
     }
     
     return 0;
