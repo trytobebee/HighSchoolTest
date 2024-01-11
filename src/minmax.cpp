@@ -28,7 +28,7 @@ int process(int n)
         index++;
     }
 
-    bubble_sort(x, 4); //排好各个位子的数字的顺序
+    sorters::bubble_sort(x, 4, false); //排好各个位子的数字的顺序
     int max = x[3] * 1000 + x[2] * 100 + x[1] * 10 + x[0]; //构造最大，最小数字，求差返回
     int min = x[0] * 1000 + x[1] * 100 + x[2] * 10 + x[3];
     return max - min;
