@@ -36,12 +36,23 @@ class CTimer
         {
             _timeRecord[tag] += span;
         }
+
+        _start = clock(); //move the start point
 	 }
 
      void OutputStat()
      {
+        double totaltm = 0;
+        int nCnt = 0;
         for (auto it = _timeRecord.begin(); it != _timeRecord.end(); it++) 
+        {
             printf("%s %.2f\n", it->first.c_str(), it->second);
+            totaltm += it->second;
+            nCnt++;
+        }
+
+        printf("total span counted: %d, time: %.2f, average span: %.2f\n", nCnt, totaltm, totaltm / nCnt);
+
      }
 
 private: 

@@ -83,7 +83,7 @@ namespace sorters
         {
             if(numExchg == 0)
             {
-                printf("no exchange happend in the %d-th round, break\n", i);
+                //printf("no exchange happend in the %d-th round, break\n", i);
                 break; //剩余都是好的顺序，不用再替换了
             }
 
@@ -132,4 +132,29 @@ namespace sorters
         }    
         return 0;
     }
+
+    //a bubble sort version for any type sorting, _T should have the < & > operator
+    template<typename _T>
+    bool Sort_TypedArray(_T* pItems, int length, bool isDesc = true)
+    {
+        for(int i = 0; i < length; i++)
+        {
+            int maxIndex = i;
+            for(int j = i + 1; j < length; j++)
+            {
+                if(pItems[maxIndex] < pItems[j] && isDesc || pItems[maxIndex] > pItems[j] && !isDesc) //把大的换上来
+                {
+                    maxIndex = j;
+                }
+            }
+            
+            if(maxIndex != i)
+            {
+                _T tmp = pItems[i];
+                pItems[i] = pItems[maxIndex];
+                pItems[maxIndex] = tmp;
+            }
+        }    
+        return 0;
+    } 
 }

@@ -1,5 +1,23 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "__locale": "cpp",
+        "__string": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "iomanip": "cpp",
+        "iosfwd": "cpp",
+        "new": "cpp",
+        "vector": "cpp",
+        "ratio": "cpp",
+        "ostream": "cpp",
+        "set": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+        "unordered_map": "cpp",
+        "chrono": "cpp",
+        "__node_handle": "cpp",
+        "__config": "cpp"
     }
 }

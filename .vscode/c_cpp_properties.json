@@ -2,7 +2,6 @@
     "configurations": [
         {
             "name": "Mac",
-            "compilerPathInCppPropertiesJson": "/usr/bin/clang",
             "includePath": [
                 "/Users/tfw/codebase/HighSchoolTest/**",
                 "${workspaceFolder}/include"

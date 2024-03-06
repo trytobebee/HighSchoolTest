@@ -5,7 +5,6 @@
 
 namespace mathfunc
 {
-
     inline bool isPrime(int a)
     {
         if (a < 1)
@@ -52,7 +51,10 @@ namespace mathfunc
 
             i++;
             if(i >= primeCount)
-                printf("prime list isn't long enough, could miss some factor\n");
+            {
+                printf("prime list isn't long enough, could miss some factor, this function returns unknown result\n");
+                break;
+            }
         }
             
         return true;
@@ -68,7 +70,7 @@ namespace mathfunc
             bool ret;
             if(speedup)
             {
-                ret = isPrime(i, primes, count);
+                ret = isPrime(i, primes, count); //这里会传入当前已经发现的所有的质数
             }
             else
             {
@@ -123,7 +125,7 @@ namespace mathfunc
     }
 
     //求最大公约数
-    int GetMaxCofactor(int a, int b)
+    inline int GetMaxCofactor(int a, int b)
     {
         if(a>=b && a%b==0)
             return b;
@@ -146,7 +148,8 @@ namespace mathfunc
         return maxCofactor;
     }
 
-    int GetLeastCoMultiple(int a, int b)
+    //求最小公倍数
+    inline int GetLeastCoMultiple(int a, int b)
     {
         if(a>=b && a%b==0)
             return a;
@@ -156,6 +159,7 @@ namespace mathfunc
         return a*b / GetMaxCofactor(a,b);
     }
 
+    //求出所有的质因数
     inline bool GetAllPrimeFactor(int a, int *&factors, int& numFactors)
     {
         factors = new int[a]; //maximum < a
@@ -198,6 +202,44 @@ namespace mathfunc
         return true;
     }
 
+    //a faster version of GetAllPrimeFactor
+    inline bool GetAllPrimeFactorLight(int numInput, int *&factors, int& numFactors)
+    {
+        numFactors = 0;
+        int* All = new int[numInput];
+        int factor = 2;
+        
+        //将每次获得的因数从原数中除去，这样只要从最小的因数开始处理
+        //可以保证获得因数都是质因数
+        while(numInput >= 2 && factor <= sqrt(numInput))
+        {
+            if(numInput % factor == 0)
+            {
+                All[numFactors] = factor;
+                numFactors++;
+                
+                while(numInput % factor == 0)
+                {
+                    //内层循环保证这个factor有多次出现，被去除干净
+                    numInput = numInput / factor;
+                }
+            }
+            
+            factor++;
+        }
+        
+        //如果剩下的不是1，那将剩下的numInput算作最后一个质因子
+        //如果本身是质数，应该剩下的就是自身，并且All数组中没有内容
+        if(numInput > 1)
+        {
+            All[numFactors] = numInput;
+            numFactors++;
+        }
+
+        factors = All;
+        return true;
+    }
+
     inline bool PrimeFactorization(int numInput, int* &factorResult, int& numFactors)
     {
         numFactors = 0;
@@ -230,5 +272,31 @@ namespace mathfunc
         return true;
     }
 
-    
+    inline int findCommonElements(int arr1[], int arr2[], int m, int n) 
+    {
+        //vector<int> result;
+        int cnt = 0;
+        int i = 0, j = 0;
+
+        while(i < m && j < n) 
+        {
+            if(arr1[i] == arr2[j]) 
+            {
+                cnt++;
+                i++;
+                j++;
+            }
+            else if(arr1[i] < arr2[j]) 
+            {
+                i++;
+            }
+            else 
+            {
+                j++;
+            }
+        }
+
+        return cnt;
+    }
+
 }

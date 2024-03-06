@@ -3,6 +3,7 @@
 #include <iostream>
 #include "chessBoard.h"
 #include "mathfunc.h"
+#include "simpleencode.h"
 #include "unitest.h"
 using namespace std;
 
@@ -148,5 +149,88 @@ int testMath()
         cout << "最小公倍数" << mathfunc::GetLeastCoMultiple(a, b) << endl;
     }
     
+    return 0;
+}
+
+int testEncodeDecode()
+{
+    //inverse encoding
+    int n; 
+    cin >> n;
+
+    int *pInputs = new int[n];
+    for(int i = 0; i < n; i++)
+    {
+        cin >> pInputs[i];
+    }
+    
+    int functionid;
+    cin >> functionid;
+    
+    int *pResult;
+    if(functionid == 0)
+    {
+        pResult = encode(n, pInputs);
+    }
+    else if(functionid == 1)
+    {
+        pResult = decode(n, pInputs);
+    }
+
+    for(int i = 0; i < n; i++)
+    {
+        cout << pResult[i] << " ";
+    }
+    cout << endl;
+    
+    delete[] pResult;
+    pResult = NULL;
+    return 0;
+}
+
+int testRabbit()
+{
+    int iterNum = 10000; //找了多少次
+    int n;
+    cin >> n; //洞
+
+    if(n <= 0)
+    {
+        cout << "illegal input" << endl;
+    }
+    
+    bool * pMarked = new bool[n]; //每个洞一个标志boolean， false表示没有被狐狸到过
+    for(int i = 0; i < n; i++)
+        pMarked[i] = false;
+    
+
+    int curIndex = 0; 
+    int curGap = 0;
+    
+    //跑坑找兔子的流程，每跑到一个坑，mark为true
+    for(int i = 0; i < iterNum; i++)
+    {
+        pMarked[curIndex] = true;    
+        curGap ++;
+        
+        curIndex += curGap + 1;
+        
+        //需处理Index循环的问题，当前的index + gap应该还要落回到n的范围内
+        curIndex = curIndex % n;
+    }
+
+    bool find = true;
+    for(int i = 0; i < n; i++)
+    {
+        if(pMarked[i] == false)
+        {
+            cout << i+1 << " ";
+            find = false;
+        }
+    }
+
+    if(find)
+        cout << "It is nice!" << endl;
+
     return 0;
 }

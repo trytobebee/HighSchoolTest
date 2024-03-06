@@ -25,7 +25,7 @@ int FractionSum(int a1, int b1, int a2, int b2)
 
     A = A - C * B; //真分子
     
-    
+    //如果有则输出整数部分
     if(C > 0)
     {
         cout << C;
@@ -37,7 +37,7 @@ int FractionSum(int a1, int b1, int a2, int b2)
         return 0;
 
     //分子、分母求最大公因子并约分
-    int cofactor = GetMaxCofactor(A, B);
+    int cofactor = mathfunc::GetMaxCofactor(A, B);
     
     cout << A/cofactor << "/" << B/cofactor;
     return 0;
