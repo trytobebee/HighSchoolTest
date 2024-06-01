@@ -10,6 +10,7 @@
                 "-g",
                 "${file}",
                 "unitest.cpp",
+                "largeNum.cpp",
                 "-I",
                 "${workspaceFolder}/include",
                 "-o",

@@ -205,6 +205,7 @@ struct chessBoard
         }
     }
 
+    //enumerate all possible placement of _n queens on the entire _n*_n board
     void FitQueensAllSimpleEum()
     {
         //convert the space to a particular setting
@@ -282,13 +283,6 @@ struct chessBoard
         return;
     }
 };
-
-// struct chessBoardRow
-// {
-//     int * _pValues;
-//     int _n;
-//     SortedList_ND _lstZeros;
-// };
 
 struct chessBoard2
 {

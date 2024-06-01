@@ -2,6 +2,7 @@
 record the code of my son's info class exercises
 
 just updated the package by adding more basic lib function and examples
+- update time: 2024.3.6
 - strmatch, kmp algorithm
 - sorter, contains bubble sort and select sort, also included the template version
 - mathfunc, some often used basic math functions
@@ -13,4 +14,7 @@ just updated the package by adding more basic lib function and examples
 - interval, example for struct define
 - paveN, demostration of recursive algorithm
 - chessBoard, demostration of trackback
+
+
 started on 2023-12-11, it's also my first jouney in github although I have been working on code developing for years and already famous for the super successful lightGBM project.
+- update time: 2024.06.01

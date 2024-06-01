@@ -1,13 +1,12 @@
 
-// #include<iostream> 
+#include<iostream> 
 // #include <cstdio>
 // #include <algorithm>
-// using namespace std;
-// #include "ctimer.h"
+#include "ctimer.h"
 
-// using namespace std;
-// const int MAXN = 1e5+10;
-// int roof[MAXN];
+using namespace std;
+const int MAXN = 1e5+10;
+int roof[MAXN];
 
 // //冒泡排序
 // int sort_in_pos(int* x, int length)

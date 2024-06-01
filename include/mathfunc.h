@@ -124,29 +124,63 @@ namespace mathfunc
         return true;
     }
 
-    //求最大公约数
+    //euclid method来求最大公约数
     inline int GetMaxCofactor(int a, int b)
     {
-        if(a>=b && a%b==0)
-            return b;
-        else if(a<=b && b%a==0)
-            return a;
-        
-        int *aFactors;
-        int aFactorCount;
-        GetAllFactor(a, aFactors, aFactorCount);
-        
-        int maxCofactor = 1;
-        for(int i = 0; i < aFactorCount; i++)
+        //默认 a > b, 不满足就调换一下
+        if(a < b)
         {
-            if(b % aFactors[i] == 0 && aFactors[i] > maxCofactor)
-            {
-                maxCofactor = aFactors[i];
-            }
+            int temp = a;
+            a = b;
+            b = temp;
         }
 
-        return maxCofactor;
+        //a,b的最大公约数是 (a mod b, b)的最大公约数，一次辗转类推
+        int r = a % b;
+        if(r == 0)
+            return b;
+
+        return GetMaxCofactor(b, r);
     }
+
+    int GetMaxCofactor(int * numbers, int cnt)
+    {
+        if(cnt < 2)
+            return -1;
+
+        int mcf = GetMaxCofactor(numbers[0], numbers[1]);
+        for(int i = 2; i < cnt; i++)
+        {
+            mcf = GetMaxCofactor(mcf, numbers[i]);
+        }
+
+        return mcf;
+    }
+
+
+    // //求最大公约数, 原始的做法
+    // inline int GetMaxCofactor(int a, int b)
+    // {
+    //     if(a>=b && a%b==0)
+    //         return b;
+    //     else if(a<=b && b%a==0)
+    //         return a;
+        
+    //     int *aFactors;
+    //     int aFactorCount;
+    //     GetAllFactor(a, aFactors, aFactorCount);
+        
+    //     int maxCofactor = 1;
+    //     for(int i = 0; i < aFactorCount; i++)
+    //     {
+    //         if(b % aFactors[i] == 0 && aFactors[i] > maxCofactor)
+    //         {
+    //             maxCofactor = aFactors[i];
+    //         }
+    //     }
+
+    //     return maxCofactor;
+    // }
 
     //求最小公倍数
     inline int GetLeastCoMultiple(int a, int b)
@@ -272,6 +306,7 @@ namespace mathfunc
         return true;
     }
 
+    //统计两个排过序的数组中有多少一样的元素，m,n分别是第一个数组和第二个数组的长度
     inline int findCommonElements(int arr1[], int arr2[], int m, int n) 
     {
         //vector<int> result;
@@ -299,4 +334,56 @@ namespace mathfunc
         return cnt;
     }
 
+    //n!
+    inline long long factorial_sim(int n)
+    {
+        long long result = 1;
+        for(int i = 1; i <= n; i++)
+        {
+            result = result * n;
+        }
+        return result;
+    }
+
+
+    //把string转化成int数字
+    int StrToInt(char* str, int len, bool reverse = false)
+    {
+        int val = 0;
+        for(int i = 0; i < len; i++)
+        {
+            if(!reverse)
+                val = val * 10 + (str[len-1 - i]-'0');
+            else
+                val = val * 10 + (str[i] - '0');
+        }
+        return val;
+    }
+
+    //带周期的加和减
+    inline bool roundAdd(int& x, int round, int delta = 1)
+    {
+        bool goRound = false;
+        x += delta;
+        if(x > round)
+        {
+            x -= round;
+            goRound = true;
+        }    
+        
+        return goRound;
+    }
+
+    inline bool roundMinus(int& x, int round, int delta = 1)
+    {
+        bool goRound = false;
+        x -= delta;
+        if(x < 0)
+        {
+            x += round;
+            goRound = true;
+        }    
+        
+        return goRound;
+    }
 }
